@@ -3,57 +3,40 @@ package com.springtrainings.drugapp.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+import com.springtrainings.drugapp.service.DrugService;
+
+@RestController // Deligation logic
 public class DrugController {
+
+	@Autowired
+	DrugService service;
 	
-	
-	// return all drug names
-	
-	
-	//http:localhost:9090
 	@GetMapping
-	public String sayHello()
-	{
+	public String sayHello() {
 		return "Hi";
 	}
 
+	// Deligation/ Connectivity logic
+	// http:localhost:9090/drugs
+//	@GetMapping(path = "/drugs", produces = MediaType.APPLICATION_XML_VALUE)
 	
+	
+	
+	@GetMapping(path = "/drugs")
+	public List<Drug> alldrugs() {
+		
+//		DrugService service = new DrugService();
 
-	//http:localhost:9090/drugs
-	@GetMapping("/drugs")
-	public List<Drug> alldrugs()
-	{
 		
+		System.out.println("Drug Service hash code..... "+service.hashCode());
 		
-		
-		
-//			
-//		List<String> list = new ArrayList<>();
-//		
-//		list.add("Amaoxilin");
-//		list.add("Lipitor");
-//		list.add("VitaminD");
-//		list.add("Tamiflu");
-//		
-//		System.out.println(list);
-//		
-//		return list;
-		
-		List<Drug> list = new ArrayList<>();
-		Drug d1 = new Drug("Amaoxilin", 12.5, true, "desc1");
-		Drug d2 = new Drug("Amaoxilin2", 13.5, false, "desc2");
-		
-		list.add(d1);
-		list.add(d2);
-		
+		List<Drug> list = service.getAllDrugs();
 		return list;
-		
-		
-		
-		
+
 	}
 
 }
