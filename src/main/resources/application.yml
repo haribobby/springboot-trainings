@@ -14,8 +14,14 @@ server:
 #      enabled: true
 
 
+#spring:
+#  security:
+#    user:
+#      name: admin
+#      password: admin
+
+
 spring:
-  security:
-    user:
-      name: admin
-      password: admin
+  data:
+    mongodb:
+      database: drugs_db

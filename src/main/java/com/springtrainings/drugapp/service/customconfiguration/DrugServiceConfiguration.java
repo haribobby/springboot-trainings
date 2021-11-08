@@ -8,9 +8,9 @@ import com.springtrainings.drugapp.service.DrugService;
 @Configuration
 public class DrugServiceConfiguration {
 
-	@Bean
-	public DrugService drugServiceObj() {
-		return new DrugService();
-	}
+//	@Bean
+//	public DrugService drugServiceObj() {
+//		return new DrugService();
+//	}
 
 }
