@@ -25,3 +25,9 @@ spring:
   data:
     mongodb:
       database: drugs_db
+
+
+#192.76.45.12
+
+#      uri: 
+     

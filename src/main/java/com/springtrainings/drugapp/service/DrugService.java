@@ -13,16 +13,19 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
+import com.springtrainings.drugapp.exception.DrugNotFoudException;
 import com.springtrainings.drugapp.model.Drug;
 import com.springtrainings.drugapp.repository.DrugRepository;
 
 
 @Service
-public class DrugService { // BL + PL
+public class DrugService { // BL 
 
 	
 	@Autowired
 	DrugRepository drugRepository;
+	
+
 	
 	public List<Drug> getAllDrugs() {
 
@@ -34,8 +37,10 @@ public class DrugService { // BL + PL
 //		list.add(d2);
 		
 //		BPEDRUG API
+	
 		
 		List<Drug> drugList = drugRepository.findAll();
+	
 	
 		return drugList;
 	}
@@ -47,4 +52,21 @@ public class DrugService { // BL + PL
 		drugRepository.save(drug);
 		
 	}
+	
+	
+	public Drug getDrugByID(String id)
+	{
+		Optional<Drug> drug =  drugRepository.findById(id);
+		
+		if(drug.isEmpty())
+		{
+			throw new DrugNotFoudException("Drug is not avaible for given id "+id);	
+			
+			//return "Drug is not avaible for given id \"+id"; 200
+		}
+		
+		return drug.get();
+	}
+	
+
 }
