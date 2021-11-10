@@ -44,9 +44,9 @@ public class DrugController {
 
 	// Deligation/ Connectivity logic
 	// http:localhost:9090/drugs
-//	@GetMapping(path = "/drugs", produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
+	@GetMapping(path = "/drugs", produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
 
-	@GetMapping(path = "/drugs")
+	//@GetMapping(path = "/drugs")
 	public List<Drug> alldrugs() {
 
 //		DrugService service = new DrugService();
