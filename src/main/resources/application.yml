@@ -30,4 +30,9 @@ spring:
 #192.76.45.12
 
 #      uri: 
-     
+
+logging:
+  level:
+    root: info
+
+

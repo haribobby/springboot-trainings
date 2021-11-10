@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,9 +20,11 @@ import com.springtrainings.drugapp.service.DrugService;
 
 import lombok.AllArgsConstructor;
 import lombok.experimental.Delegate;
+import lombok.extern.log4j.Log4j2;
 
 @RestController // Deligation logic DL
 @AllArgsConstructor
+@Log4j2
 public class DrugController {
 
 //	@Autowired
@@ -41,14 +44,20 @@ public class DrugController {
 
 	// Deligation/ Connectivity logic
 	// http:localhost:9090/drugs
-//	@GetMapping(path = "/drugs", produces = MediaType.APPLICATION_XML_VALUE)
+//	@GetMapping(path = "/drugs", produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
 
 	@GetMapping(path = "/drugs")
 	public List<Drug> alldrugs() {
 
 //		DrugService service = new DrugService();
 
-		System.out.println("alldrugs():: get alll drugs called");
+//		System.out.println("alldrugs():: get alll drugs called");
+		
+		log.debug("DEBUG ::: alldrugs()  get alll drugs called....");
+		log.info("INFO ::: alldrugs()  get alll drugs called....");
+		log.warn("WARN ::: alldrugs()  get alll drugs called....");
+		log.error("ERROR ::: alldrugs()  get alll drugs called....");
+		log.fatal("FATAL ::: alldrugs()  get alll drugs called....");
 
 		List<Drug> list = service.getAllDrugs();
 		return list;
@@ -72,21 +81,25 @@ public class DrugController {
 	@GetMapping("/drugs/{id}")
 	public ResponseEntity getDrugByID(@PathVariable("id") String id) {
 
+		log.info("getDrugByID():: get drugByID");
 		try {
 			Drug drug = service.getDrugByID(id); // risky code/call
 			return new ResponseEntity(drug, HttpStatus.OK);
 		} catch (DrugNotFoudException dnfe) {
 
+			log.error("Error:: getDrugByID():: get drugByID",dnfe.getMessage() );
 			return new ResponseEntity(dnfe.getMessage(),HttpStatus.NOT_FOUND);
 		}
 
 	}
 
 //	add drug   - POST - DONE
-//	get drug by id - GET
+//	get drug by id - GET - DONE
 //	delete drug by id - DELETE
 //  update Drug	- PUT/PATCH
-
+// GET consume https://jsonplaceholder.typicode.com/users expose only [{ un and email and zipode }]
+	// RESTTemplate
+	
 //	@PostMapping(path = "/drugs")
 //	public List<Drug> postdrugs() {
 //
