@@ -31,8 +31,17 @@ spring:
 
 #      uri: 
 
+# logging:
+#   level:
+#     root: info
 logging:
   level:
-    root: info
+    root: DEBUG
+    io:
+      undertow: DEBUG
+    org:
+      springframework:
+        web: DEBUG
+        security: DEBUG
 
 
